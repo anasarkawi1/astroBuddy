@@ -42,7 +42,6 @@ client.on('messageCreate', async (msg) => {
             msg.reply({embeds: [embed]});
             break;
         case 'today':
-            console.log('today');
             apiReqs.today((res) => {
                 let embed = new Discord.EmbedBuilder()
                     .setTitle(`Today\'s image: ${res.title}`)
