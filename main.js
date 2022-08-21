@@ -10,6 +10,7 @@ require('dotenv').config();
 
 // Import modules
 const Discord = require('discord.js');
+const express = require('express');
 
 // Import own modules
 const apiReqs = require('./apiReqs.js');
@@ -18,6 +19,21 @@ const apiReqs = require('./apiReqs.js');
 // Configure Discord.js
 const dcPrefix = '~';
 const client = new Discord.Client({ intents: [Discord.GatewayIntentBits.Guilds, Discord.GatewayIntentBits.GuildMessages, Discord.GatewayIntentBits.MessageContent]});
+
+
+// Configure express for web dashboard
+const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+
+// Web app
+app.get('/', (req, res) => {
+    res.status(200).send({ status: 'operational' });
+});
+
+// Web app start
+app.listen(process.env.PORT || 80);
 
 
 // Bot
